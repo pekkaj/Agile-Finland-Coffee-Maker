@@ -95,7 +95,7 @@ public class CoffeeMakerTest {
 		thread.start();
 		coffeeMaker.stopPolling();
 		
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		Assert.assertTrue(called);
 	}
 }
