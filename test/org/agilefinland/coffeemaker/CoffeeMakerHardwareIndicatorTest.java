@@ -10,20 +10,20 @@ public class CoffeeMakerHardwareIndicatorTest {
 	@Test
 	public void testIndicatorOn() {
 		
-		CoffeeMakerHardware maker = new MockCoffeeMaker();
+		CoffeeMakerAPI maker = new SysoutCoffeeMakerAPI();
 		
-		maker.setIndicatorState(CoffeeMakerHardware.INDICATOR_ON);
+		maker.setIndicatorState(CoffeeMakerAPI.INDICATOR_ON);
 		
-		Assert.assertEquals(CoffeeMakerHardware.INDICATOR_ON, maker.getIndicatorState());
+		Assert.assertEquals(CoffeeMakerAPI.INDICATOR_ON, maker.getIndicatorState());
 	
 	}
 	
 	public void testIndicatorOff() {
-		CoffeeMakerHardware maker = new MockCoffeeMaker();
+		CoffeeMakerAPI maker = new SysoutCoffeeMakerAPI();
 		
-		maker.setIndicatorState(CoffeeMakerHardware.INDICATOR_OFF);
+		maker.setIndicatorState(CoffeeMakerAPI.INDICATOR_OFF);
 		
-		Assert.assertEquals(CoffeeMakerHardware.INDICATOR_OFF, maker.getIndicatorState());
+		Assert.assertEquals(CoffeeMakerAPI.INDICATOR_OFF, maker.getIndicatorState());
 	
 	}
 
