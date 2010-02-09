@@ -2,7 +2,8 @@ package org.agilefinland.coffeemaker;
 
 public class SysoutCoffeeMakerAPI implements CoffeeMakerAPI {
 
-	int indicatorState = 0;
+	int indicatorState = CoffeeMakerAPI.INDICATOR_OFF;
+	int brewButtonStatus = CoffeeMakerAPI.BREW_BUTTON_NOT_PUSHED;
 	
 	@Override
 	public void setIndicatorState(int state) {
@@ -14,6 +15,11 @@ public class SysoutCoffeeMakerAPI implements CoffeeMakerAPI {
 	@Override
 	public int getIndicatorState() {
 		return this.indicatorState;
+	}
+
+	@Override
+	public int getBrewButtonStatus() {
+		return this.brewButtonStatus;
 	}
 	
 }
