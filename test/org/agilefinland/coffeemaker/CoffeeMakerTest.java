@@ -45,4 +45,25 @@ public class CoffeeMakerTest {
 		coffeeMaker.handleStatus();
 		Assert.assertTrue(called);
 	}
+	
+	@Test
+	public void testIndicatorOnWhenButtonIsPressed(){
+		CoffeeMaker maker = new CoffeeMaker();
+		SysoutCoffeeMakerAPI makerAPI = new SysoutCoffeeMakerAPI();
+		maker.setHardware(makerAPI);
+		Observer obs1 = 
+			new Observer() {
+				
+				@Override
+				public void handleEvent(PollEvent event) {
+					Assert.assertEquals(PollEvent.BUTTON_PRESSED, event);
+					called = true;
+				}
+			};
+
+		maker.registerObserver(obs1);
+		makerAPI.pressButton();
+		maker.handleStatus();
+		Assert.assertEquals(CoffeeMakerAPI.INDICATOR_ON, makerAPI.getIndicatorState());
+	}
 }
