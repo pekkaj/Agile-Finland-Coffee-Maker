@@ -7,7 +7,9 @@ package org.agilefinland.coffeemaker;
  * @author kivimaki
  *
  */
-public class CoffeeMaker {
+public class CoffeeMaker implements Runnable {
+	
+	private volatile boolean running = true;
 	
 	private CoffeeMakerAPI hardware;
 	
@@ -16,20 +18,15 @@ public class CoffeeMaker {
 	public static void main(String[] args) {
 		
 	}
+	
+	@Override
+	public void run() {
 
-	public void startPolling() {
-		int counter = 0;
-		
-		while(counter < 5) {
-			counter++;
+		while(running) {
 			handleStatus();
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-			}
 		}
 	}
-	
+
 	void handleStatus() {
 		
 		if (hardware.getBrewButtonStatus() == CoffeeMakerAPI.BREW_BUTTON_PUSHED) {
@@ -44,5 +41,9 @@ public class CoffeeMaker {
 	
 	public void setHardware(CoffeeMakerAPI hardware) {
 		this.hardware = hardware;
+	}
+	
+	public void stopPolling() {
+		running = false;
 	}
 }
