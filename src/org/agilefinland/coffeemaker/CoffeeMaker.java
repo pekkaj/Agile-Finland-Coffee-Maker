@@ -31,6 +31,7 @@ public class CoffeeMaker implements Runnable {
 		
 		if (hardware.getBrewButtonStatus() == CoffeeMakerAPI.BREW_BUTTON_PUSHED) {
 			observer.handleEvent(PollEvent.BUTTON_PRESSED);
+			hardware.setIndicatorState(CoffeeMakerAPI.INDICATOR_ON);
 		}	
 	}
 	
