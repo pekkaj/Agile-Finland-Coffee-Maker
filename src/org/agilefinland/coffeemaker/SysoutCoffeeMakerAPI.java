@@ -31,6 +31,7 @@ public class SysoutCoffeeMakerAPI implements CoffeeMakerAPI {
 	}
 	
 	public void pressButton() {
+		System.out.println("Brew button was pressed.");
 		this.brewButtonStatus = CoffeeMakerAPI.BREW_BUTTON_PUSHED;
 	}
 
