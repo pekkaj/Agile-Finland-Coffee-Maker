@@ -4,7 +4,8 @@ public class SysoutCoffeeMakerAPI implements CoffeeMakerAPI {
 
 	int indicatorState = CoffeeMakerAPI.INDICATOR_OFF;
 	int brewButtonStatus = CoffeeMakerAPI.BREW_BUTTON_NOT_PUSHED;
-
+	int boilerState = CoffeeMakerAPI.BOILER_OFF;
+	
 	@Override
 	public void setIndicatorState(int state) {
 		this.indicatorState = state;
@@ -25,11 +26,11 @@ public class SysoutCoffeeMakerAPI implements CoffeeMakerAPI {
 	@Override
 	public void setBoilerState(int boilerStatus) {
 		System.out.println("Boiler state is " + boilerStatus);
+		this.boilerState = boilerStatus;
 	}
 	
 	public void pressButton() {
 		this.brewButtonStatus = CoffeeMakerAPI.BREW_BUTTON_PUSHED;
 	}
-
 
 }
