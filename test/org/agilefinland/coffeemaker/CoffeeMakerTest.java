@@ -51,15 +51,7 @@ public class CoffeeMakerTest {
 		CoffeeMaker maker = new CoffeeMaker();
 		SysoutCoffeeMakerAPI makerAPI = new SysoutCoffeeMakerAPI();
 		maker.setHardware(makerAPI);
-		Observer obs1 = 
-			new Observer() {
-				
-				@Override
-				public void handleEvent(PollEvent event) {
-					Assert.assertEquals(PollEvent.BUTTON_PRESSED, event);
-					called = true;
-				}
-			};
+		Observer obs1 = new CoffeeMakerObserver(makerAPI);  
 
 		maker.registerObserver(obs1);
 		makerAPI.pressButton();
