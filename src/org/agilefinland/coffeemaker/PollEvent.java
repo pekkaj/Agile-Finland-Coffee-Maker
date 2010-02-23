@@ -1,7 +1,10 @@
 package org.agilefinland.coffeemaker;
 
 public enum PollEvent {
-	NO_EVENT,
 	
-	BUTTON_PRESSED
+	BUTTON_PRESSED,
+	
+	BOILER_EMPTY,
+	
+	BOILER_NOT_EMPTY;
 }

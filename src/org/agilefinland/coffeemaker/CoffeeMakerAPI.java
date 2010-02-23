@@ -13,4 +13,11 @@ public interface CoffeeMakerAPI {
 	public static final int INDICATOR_ON = 0;
 	public static final int INDICATOR_OFF = 1;
 	
+	
+	public static final int BOILER_ON = 0;
+	public static final int BOILER_OFF = 1;
+	
+	/** This function turns the heating element in on or off. */
+	public void setBoilerState(int boilerStatus);
+	
 }

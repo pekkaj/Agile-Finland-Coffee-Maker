@@ -14,8 +14,6 @@ import org.junit.Test;
  */
 public class CoffeeMakerTest {
 
-	private boolean called = false;
-	
 	@Test
 	public void testMain() {
 		CoffeeMaker.main(null);
@@ -30,20 +28,10 @@ public class CoffeeMakerTest {
 		CoffeeMaker coffeeMaker = new CoffeeMaker();
 		coffeeMaker.setHardware(hardware);
 
-		called = false;
-		Observer obs1 = 
-		new Observer() {
-			
-			@Override
-			public void handleEvent(PollEvent event) {
-				Assert.assertEquals(PollEvent.BUTTON_PRESSED, event);
-				called = true;
-			}
-		};
-
+		TestObserver obs1 = new TestObserver();
 		coffeeMaker.registerObserver(obs1);
 		coffeeMaker.handleStatus();
-		Assert.assertTrue(called);
+		Assert.assertTrue(obs1.isCalled());
 	}
 	
 	@Test
@@ -59,6 +47,7 @@ public class CoffeeMakerTest {
 		Assert.assertEquals(CoffeeMakerAPI.INDICATOR_ON, makerAPI.getIndicatorState());
 	}
 
+
 	@Test
 	public void testPollNoEvent() {
 		SysoutCoffeeMakerAPI hardware = new SysoutCoffeeMakerAPI();
@@ -67,22 +56,14 @@ public class CoffeeMakerTest {
 		CoffeeMaker coffeeMaker = new CoffeeMaker();
 		coffeeMaker.setHardware(hardware);
 
-		called = false;
-		Observer obs1 = 
-		new Observer() {
-			
-			@Override
-			public void handleEvent(PollEvent event) {
-				Assert.assertEquals(PollEvent.BUTTON_PRESSED, event);
-				called = true;
-			}
-		};
+		TestObserver obs1 = new TestObserver();
 
 		coffeeMaker.registerObserver(obs1);
 		coffeeMaker.handleStatus();
-		Assert.assertFalse(called);
+		Assert.assertFalse(obs1.isCalled());
 	}
 	
+
 	@Test
 	public void testPollingThread() throws InterruptedException {
 		
@@ -92,23 +73,27 @@ public class CoffeeMakerTest {
 		CoffeeMaker coffeeMaker = new CoffeeMaker();
 		coffeeMaker.setHardware(hardware);
 
-		called = false;
-		Observer obs1 = 
-		new Observer() {
-			
-			@Override
-			public void handleEvent(PollEvent event) {
-				Assert.assertEquals(PollEvent.BUTTON_PRESSED, event);
-				called = true;
-			}
-		};
+		TestObserver obs1 = new TestObserver();
 		coffeeMaker.registerObserver(obs1);
 
 		Thread thread = new Thread(coffeeMaker);
 		thread.start();
+		Thread.sleep(100);
 		coffeeMaker.stopPolling();
+		Assert.assertTrue(obs1.isCalled());
+	}
+	
+	private static class TestObserver implements Observer {
+		private boolean called = false;
 		
-		Thread.sleep(500);
-		Assert.assertTrue(called);
+		@Override
+		public void handleEvent(PollEvent event) {
+			Assert.assertEquals(PollEvent.BUTTON_PRESSED, event);
+			called = true;
+		}
+		
+		public boolean isCalled() {
+			return called;
+		}
 	}
 }

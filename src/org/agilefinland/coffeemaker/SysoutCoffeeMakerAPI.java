@@ -22,8 +22,14 @@ public class SysoutCoffeeMakerAPI implements CoffeeMakerAPI {
 		return this.brewButtonStatus;
 	}
 
+	@Override
+	public void setBoilerState(int boilerStatus) {
+		System.out.println("Boiler state is " + boilerStatus);
+	}
+	
 	public void pressButton() {
 		this.brewButtonStatus = CoffeeMakerAPI.BREW_BUTTON_PUSHED;
 	}
+
 
 }
