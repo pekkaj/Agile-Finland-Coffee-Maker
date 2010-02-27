@@ -20,4 +20,9 @@ public interface CoffeeMakerAPI {
 	/** This function turns the heating element in on or off. */
 	public void setBoilerState(int boilerStatus);
 	
+	public static final int VALVE_OPEN = 0;
+	public static final int VALVE_CLOSED = 1;
+	
+	public void setReliefValveState(int reliefValveState);
+	
 }
