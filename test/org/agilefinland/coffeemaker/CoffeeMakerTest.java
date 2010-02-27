@@ -39,7 +39,8 @@ public class CoffeeMakerTest {
 		CoffeeMaker maker = new CoffeeMaker();
 		SysoutCoffeeMakerAPI makerAPI = new SysoutCoffeeMakerAPI();
 		maker.setHardware(makerAPI);
-		TestObserver obs1 = new TestObserver();
+		Observer obs1 = new CoffeeMakerObserver(makerAPI);  
+
 		maker.registerObserver(obs1);
 		makerAPI.pressButton();
 		maker.handleStatus();
