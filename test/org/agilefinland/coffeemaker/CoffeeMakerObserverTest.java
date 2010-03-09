@@ -15,7 +15,7 @@ public class CoffeeMakerObserverTest {
 		hwMock.setIndicatorState(EasyMock.anyInt());
 		hwMock.setBoilerState(EasyMock.anyInt());
 		hwMock.setReliefValveState(EasyMock.eq(CoffeeMakerAPI.VALVE_CLOSED));
-		
+
 		EasyMock.replay(hwMock);
 
 		CoffeeMakerObserver observer = new CoffeeMakerObserver(hwMock);
@@ -31,7 +31,7 @@ public class CoffeeMakerObserverTest {
 		hwMock.setIndicatorState( EasyMock.anyInt());
 		hwMock.setBoilerState(EasyMock.eq(CoffeeMakerAPI.BOILER_ON));
 		hwMock.setReliefValveState(EasyMock.anyInt());
-		
+
 		EasyMock.replay(hwMock);
 
 		CoffeeMakerObserver observer = new CoffeeMakerObserver(hwMock);
@@ -39,7 +39,12 @@ public class CoffeeMakerObserverTest {
 
 		EasyMock.verify(hwMock);
 	}
-	
+
+	@Test
+	public void testOffHeatingWhenBoilerEmptyAndBoilerIsHeating(){
+		//TODO: test case
+	}
+
 	@Test
 	public void testSettingOnTheIndicatorWhenBrewButtonIsPressed(){
 		CoffeeMakerAPI coffeeMakerAPI = new SysoutCoffeeMakerAPI();
