@@ -12,20 +12,10 @@ public class CoffeeMakerObserverTest {
 	public void testSetReliefValveOn() {
 		CoffeeMakerAPI hwMock = EasyMock.createMock(CoffeeMakerAPI.class);
 
-		// EasyMock.expect(hwMock.set)
-
-		CoffeeMakerObserver observer = new CoffeeMakerObserver(hwMock);
-
-		// FIXME ...
-	}
-
-	@Test
-	public void testSetBoilerOn() {
-		CoffeeMakerAPI hwMock = EasyMock.createMock(CoffeeMakerAPI.class);
-
-		hwMock.setIndicatorState( EasyMock.anyInt());
-		hwMock.setBoilerState(EasyMock.eq(CoffeeMakerAPI.BOILER_ON));
-
+		hwMock.setIndicatorState(EasyMock.anyInt());
+		hwMock.setBoilerState(EasyMock.anyInt());
+		hwMock.setReliefValveState(EasyMock.eq(CoffeeMakerAPI.VALVE_CLOSED));
+		
 		EasyMock.replay(hwMock);
 
 		CoffeeMakerObserver observer = new CoffeeMakerObserver(hwMock);
@@ -35,12 +25,26 @@ public class CoffeeMakerObserverTest {
 	}
 
 	@Test
-	public void testSettingOnTheIndicatorWhenBrewButtonIsPressed(){
+	public void testSetBoilerOn() {
+		CoffeeMakerAPI hwMock = EasyMock.createMock(CoffeeMakerAPI.class);
 
+		hwMock.setIndicatorState( EasyMock.anyInt());
+		hwMock.setBoilerState(EasyMock.eq(CoffeeMakerAPI.BOILER_ON));
+		hwMock.setReliefValveState(EasyMock.anyInt());
+		
+		EasyMock.replay(hwMock);
+
+		CoffeeMakerObserver observer = new CoffeeMakerObserver(hwMock);
+		observer.handleEvent(PollEvent.BUTTON_PRESSED);
+
+		EasyMock.verify(hwMock);
+	}
+	
+	@Test
+	public void testSettingOnTheIndicatorWhenBrewButtonIsPressed(){
 		CoffeeMakerAPI coffeeMakerAPI = new SysoutCoffeeMakerAPI();
 		Observer makerObserver = new CoffeeMakerObserver(coffeeMakerAPI);
 		makerObserver.handleEvent(PollEvent.BUTTON_PRESSED);
 		Assert.assertEquals(coffeeMakerAPI.getIndicatorState(), CoffeeMakerAPI.INDICATOR_ON);
-
 	}
 }
