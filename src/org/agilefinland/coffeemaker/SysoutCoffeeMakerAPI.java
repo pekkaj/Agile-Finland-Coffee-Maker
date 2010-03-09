@@ -7,7 +7,7 @@ public class SysoutCoffeeMakerAPI implements CoffeeMakerAPI {
 	int boilerState = CoffeeMakerAPI.BOILER_OFF;
 	int reliefValveState = CoffeeMakerAPI.VALVE_OPEN;
 	int boilerStatus = CoffeeMakerAPI.BOILER_EMPTY;
-	
+
 	@Override
 	public void setIndicatorState(int state) {
 		this.indicatorState = state;
@@ -30,7 +30,7 @@ public class SysoutCoffeeMakerAPI implements CoffeeMakerAPI {
 		System.out.println("Boiler state is " + boilerStatus);
 		this.boilerState = boilerStatus;
 	}
-	
+
 	public void pressButton() {
 		System.out.println("Brew button was pressed.");
 		this.brewButtonStatus = CoffeeMakerAPI.BREW_BUTTON_PUSHED;
@@ -44,12 +44,17 @@ public class SysoutCoffeeMakerAPI implements CoffeeMakerAPI {
 
 	@Override
 	public int getBoilerStatus() {
-		
+
 		return this.boilerStatus;
 	}
 
 	public void setBoilerStatus(int boilerStatus) {
 		this.boilerStatus = boilerStatus;
+	}
+
+	@Override
+	public int getBoilerState() {
+		return this.boilerState;
 	}
 
 }
