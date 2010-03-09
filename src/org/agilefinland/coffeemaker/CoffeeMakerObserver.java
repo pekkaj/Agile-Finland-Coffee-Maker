@@ -12,8 +12,11 @@ public class CoffeeMakerObserver implements Observer {
 	@Override
 	public void handleEvent(PollEvent event) {
 		if(PollEvent.BUTTON_PRESSED.equals(event)) {
-			hardware.setIndicatorState(CoffeeMakerAPI.INDICATOR_ON);
+			hardware.setIndicatorState(CoffeeMakerAPI.INDICATOR_OFF);
 			hardware.setBoilerState(CoffeeMakerAPI.BOILER_ON);
+		}
+		else if (PollEvent.BOILER_EMPTY.equals(event)) {
+			hardware.setIndicatorState(CoffeeMakerAPI.INDICATOR_ON);
 		}
 	}
 

@@ -44,7 +44,7 @@ public class CoffeeMakerTest {
 		maker.registerObserver(obs1);
 		makerAPI.pressButton();
 		maker.handleStatus();
-		Assert.assertEquals(CoffeeMakerAPI.INDICATOR_ON, makerAPI.getIndicatorState());
+		Assert.assertEquals(CoffeeMakerAPI.INDICATOR_OFF, makerAPI.getIndicatorState());
 	}
 
 
