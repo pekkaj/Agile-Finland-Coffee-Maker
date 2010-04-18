@@ -1,6 +1,12 @@
 package org.agilefinland.coffeemaker;
 
 public interface CoffeeMakerAPI {
+	
+	public int WARMER_EMPTY = 0;
+	public int POT_EMPTY = 1;
+	public int POT_NOT_EMPTY = 2;
+	
+	public int getWarmerPlateStatus();
 
 	public int getBrewButtonStatus();
 
@@ -18,7 +24,6 @@ public interface CoffeeMakerAPI {
 
 	/** This function turns the heating element in on or off. */
 	public void setBoilerState(int boilerStatus);
-	public int getBoilerState();
 
 	public static final int VALVE_OPEN = 0;
 	public static final int VALVE_CLOSED = 1;

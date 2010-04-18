@@ -32,9 +32,18 @@ public class CoffeeMaker implements Runnable {
 		if (hardware.getBrewButtonStatus() == CoffeeMakerAPI.BREW_BUTTON_PUSHED) {
 			observer.handleEvent(PollEvent.BUTTON_PRESSED);
 		}
-		//TODO: implement test for code block below
-		if(hardware.getBoilerStatus() == CoffeeMakerAPI.BOILER_EMPTY && hardware.getBoilerState() == CoffeeMakerAPI.BOILER_ON){
+
+		if(hardware.getBoilerStatus() == CoffeeMakerAPI.BOILER_EMPTY){
 			observer.handleEvent(PollEvent.BOILER_EMPTY);
+		}
+		
+		int warmerPlateStatus = hardware.getWarmerPlateStatus();
+		if( warmerPlateStatus == CoffeeMakerAPI.WARMER_EMPTY ) {
+			observer.handleEvent(PollEvent.WARMER_EMPTY);
+		} else if (warmerPlateStatus == CoffeeMakerAPI.POT_EMPTY ) {
+			observer.handleEvent(PollEvent.POT_EMPTY);
+		} else if (warmerPlateStatus == CoffeeMakerAPI.POT_NOT_EMPTY ) {
+			observer.handleEvent(PollEvent.POT_NOT_EMPTY);
 		}
 	}
 
