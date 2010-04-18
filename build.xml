@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="run-acceptance-tests">
+
+	<property name="src.dir" value="src" />
+	<property name="src-test.dir" value="test" />
+	<property name="build.dir" value="build/classes" />
+	<property name="build-test.dir" value="build/classes-test" />
+	<property name="report-test.dir" value="build/report" />
+	<property name="lib.dir" value="lib" />
+
+	<path id="classpath">
+		<fileset dir="${lib.dir}" includes="**/*.jar" />
+	</path>
+	
+	<path id="classpath-test">
+		<pathelement location="${build.dir}" />
+		<pathelement location="${build-test.dir}" />
+		<path refid="classpath" />
+	</path>
+
+	<target name="clean">
+		<delete dir="build" />
+	</target>
+
+	<target name="compile">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build-test.dir}" />
+		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="classpath" />
+		<javac srcdir="${src-test.dir}" destdir="${build-test.dir}">
+			<classpath>
+				<pathelement location="${build.dir}" />
+				<path refid="classpath" />
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="run-unit-tests" depends="compile">
+
+		<mkdir dir="${report-test.dir}" />
+
+		<junit printsummary="yes" haltonfailure="yes">
+
+			<classpath refid="classpath-test" />
+			
+			<formatter type="plain" />
+
+			<batchtest fork="yes" todir="${report-test.dir}">
+				<fileset dir="${src-test.dir}">
+					<include name="**/*Test.java" />
+					<exclude name="**/AcceptanceTests.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+	
+	<target name="run-acceptance-tests" depends="compile">
+
+		<mkdir dir="${report-test.dir}" />
+
+		<junit printsummary="yes" haltonfailure="yes">
+
+			<classpath refid="classpath-test" />
+			
+			<formatter type="plain" />
+
+			<batchtest fork="yes" todir="${report-test.dir}">
+				<fileset dir="${src-test.dir}">
+					<include name="**/AcceptanceTestSuite.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+</project>
