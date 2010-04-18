@@ -1,0 +1,92 @@
+﻿user presses the brew button, the indicator light turns on
+story:
+In order to see that the coffee maker software works
+As a manufacturer
+I want it to display the indicator when I press the Brew button
+acceptance tests:
+  the light is on
+estimate: 2 / 13 (with infrastructure)
+
+
+user presses the Brew button, the heating element for the boiler turns on
+story:
+In order to get warm water for my coffee
+As a Regular Coffee Drinker
+I want it to start heating the water when I press the Brew button
+acceptance tests:
+  heating is on
+estimate: 3
+
+
+user presses the brew button, the pressure-relief valve is closed
+story:
+In order to get my coffee in liquid form
+As a Regular Coffee Drinker
+I want it to spray boiling water over the coffee grounds
+acceptance tests:
+  valve is closed 
+estimate: 3
+
+when the boiler is empty, turn off the heating element for the boiler
+story:
+In order to avoid melting the coffee maker
+As a Cautious Manufacturer
+I want it to stop heating when all water has evaporated
+acceptance tests:
+  element is off
+estimate: 3
+
+when the boiler is empty, the indicator light is turned on
+story:
+In order to see that the coffee is ready for consumption
+As a Eager Coffee Addict
+I want it to indicate that the coffee is ready
+acceptance tests:
+  indicator is turned on
+  indicator light is off otherwise
+estimate: 5
+
+2. shutdown water when the pot is off: open the pressure-relief valve
+story:
+In order to avoid cleaning the mess
+As a Kitchen Cleaner
+I want the coffee machine to shut down water when pot is off the warmer plate
+acceptance tests:
+  open the valve
+  turn off the boiler heating after 2 mins
+estimate: 5
+
+
+someone puts the pot back
+story:
+In order to be able to steal some coffee while brewing is ongoing without disturbing the batch
+As a Impatient Coffee Addict
+I want it to continue brewing the coffee when I put back the pot
+acceptance tests:
+  close the valve
+  turn on the boiler heating if not empty
+estimate: 5
+
+ 
+As a lazy coffee drinker I want to find warm coffee remaining in the pot so that I can have my coffee without bothering to make some
+story:
+In order to enjoy warm coffee without bothering to make some
+As a Lazy Coffee Drinker
+I want it to keep the coffee remaining in the pot warm
+acceptance tests:
+  press brew, coffee starts dropping to the pot, warmer plate is switched on
+  coffee is ready, warmer plate is still on
+  plate goes off when no coffee left
+  turn off the warmer after 2 mins if no pot
+estimate: 13
+
+
+As a coffee maker I want to see when the coffee is ready so that I can start consuming it as soon as it has brewed
+story:
+In order to avoid long pauses in my coffee consumption
+As a Definite Coffee Addict
+I want it to indicate that the coffee is ready
+acceptance tests:
+  light is on when the boiler is empty and there is coffee in the pot
+estimate: -
+dropped
