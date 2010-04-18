@@ -10,8 +10,10 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+	//Test 
 	CoffeeMakerObserverTest.class
 })
 public class AcceptanceTests {
 
+	
 }
