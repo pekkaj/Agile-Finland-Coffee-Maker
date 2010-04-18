@@ -18,6 +18,7 @@ public class CoffeeMakerObserver implements Observer {
 		}
 		else if (PollEvent.BOILER_EMPTY.equals(event)) {
 			hardware.setIndicatorState(CoffeeMakerAPI.INDICATOR_ON);
+			hardware.setBoilerState(CoffeeMakerAPI.BOILER_OFF);
 		}
 	}
 
