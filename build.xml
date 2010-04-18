@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project basedir="." default="run-acceptance-tests">
 
 	<property name="src.dir" value="src" />
 	<property name="src-test.dir" value="test" />
@@ -10,6 +10,12 @@
 
 	<path id="classpath">
 		<fileset dir="${lib.dir}" includes="**/*.jar" />
+	</path>
+	
+	<path id="classpath-test">
+		<pathelement location="${build.dir}" />
+		<pathelement location="${build-test.dir}" />
+		<path refid="classpath" />
 	</path>
 
 	<target name="clean">
@@ -28,23 +34,38 @@
 		</javac>
 	</target>
 
-	<target name="test" depends="compile">
+	<target name="run-unit-tests" depends="compile">
 
 		<mkdir dir="${report-test.dir}" />
 
-
 		<junit printsummary="yes" haltonfailure="yes">
-			<classpath>
-				<pathelement location="${build.dir}" />
-				<pathelement location="${build-test.dir}" />
-				<path refid="classpath" />
-			</classpath>
 
+			<classpath refid="classpath-test" />
+			
 			<formatter type="plain" />
 
 			<batchtest fork="yes" todir="${report-test.dir}">
 				<fileset dir="${src-test.dir}">
 					<include name="**/*Test.java" />
+					<exclude name="**/AcceptanceTests.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+	
+	<target name="run-acceptance-tests" depends="compile">
+
+		<mkdir dir="${report-test.dir}" />
+
+		<junit printsummary="yes" haltonfailure="yes">
+
+			<classpath refid="classpath-test" />
+			
+			<formatter type="plain" />
+
+			<batchtest fork="yes" todir="${report-test.dir}">
+				<fileset dir="${src-test.dir}">
+					<include name="**/AcceptanceTests.java" />
 				</fileset>
 			</batchtest>
 		</junit>
