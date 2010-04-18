@@ -24,6 +24,7 @@ public class CoffeeMaker implements Runnable {
 
 		while(running) {
 			handleStatus();
+
 		}
 	}
 
